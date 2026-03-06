@@ -42,3 +42,23 @@ The module creates its database tables automatically via `config/config.php` dur
 
 - Uploads/evidence are stored under `storage/`.
 - This repository intentionally ignores runtime files in `storage/`.
+
+## Release Workflow
+
+You can automate tag + push + GitHub release with:
+
+```powershell
+cd application/modules/tournament
+.\scripts\release.ps1 -Version 1.0.1
+```
+
+Authentication for GitHub Release creation:
+
+- Option A: `gh auth login`
+- Option B: set env var `GH_TOKEN`
+
+Optional parameters:
+
+```powershell
+.\scripts\release.ps1 -Version 1.0.1 -Title "v1.0.1" -Notes "Bugfix release"
+```
