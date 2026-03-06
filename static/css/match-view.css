@@ -1,0 +1,119 @@
+.tk-match-view {
+    --tk-secondary-rgb: var(--bs-secondary-rgb, 108, 117, 125);
+}
+
+.tk-match-view .tk-card {
+    border-color: rgba(var(--tk-secondary-rgb), 0.65);
+    background: rgba(var(--tk-secondary-rgb), 0.08);
+}
+
+.tk-match-view .tk-card .card-header {
+    border-bottom-color: rgba(var(--tk-secondary-rgb), 0.55);
+    background: rgba(var(--tk-secondary-rgb), 0.14);
+}
+
+.tk-match-view .tk-sub-card {
+    border-color: rgba(var(--tk-secondary-rgb), 0.45);
+    background: rgba(var(--tk-secondary-rgb), 0.04);
+}
+
+.tk-match-view .tk-team-box {
+    border: 1px solid rgba(var(--tk-secondary-rgb), 0.55);
+    background: rgba(var(--tk-secondary-rgb), 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    text-decoration: none;
+    color: inherit;
+    min-height: 108px;
+}
+
+.tk-match-view a.tk-team-box {
+    transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+
+.tk-match-view a.tk-team-box:hover,
+.tk-match-view a.tk-team-box:focus {
+    background: rgba(var(--tk-secondary-rgb), 0.14);
+    border-color: rgba(var(--tk-secondary-rgb), 0.9);
+    color: inherit;
+    transform: translateY(-1px);
+}
+
+.tk-match-view .tk-team-logo {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: rgba(var(--tk-secondary-rgb), 0.2);
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.tk-match-view .tk-team-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tk-match-view .tk-team-logo span {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--bs-secondary, #6c757d);
+}
+
+.tk-match-view .tk-team-name {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.tk-match-view .tk-team-tag {
+    color: rgba(var(--tk-secondary-rgb), 0.95);
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+
+.tk-match-view .tk-vs-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 8px 12px;
+    background: rgba(var(--tk-secondary-rgb), 0.2);
+    border: 1px solid rgba(var(--tk-secondary-rgb), 0.6);
+    font-weight: 700;
+}
+
+.tk-match-view .tk-meta-item {
+    border: 1px solid rgba(var(--tk-secondary-rgb), 0.4);
+    background: rgba(var(--tk-secondary-rgb), 0.05);
+    padding: 10px 12px;
+    min-height: 66px;
+}
+
+.tk-match-view .tk-meta-label {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+}
+
+.tk-match-view .tk-meta-value {
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+    .tk-match-view .tk-team-box {
+        min-height: 92px;
+    }
+
+    .tk-match-view .tk-team-logo {
+        width: 64px;
+        height: 64px;
+    }
+}

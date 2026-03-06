@@ -1,0 +1,34 @@
+.tk-running-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.tk-running-card {
+    display: block;
+    text-decoration: none;
+    color: #1f2937;
+    background: #ffffff;
+    border: 1px solid #d9e0ea;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(10, 18, 30, 0.05);
+}
+
+.tk-running-card:hover {
+    color: #111827;
+    border-color: #b9c6d9;
+}
+
+.tk-running-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.tk-running-meta {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.35;
+}
