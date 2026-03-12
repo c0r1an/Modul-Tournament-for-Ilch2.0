@@ -8,7 +8,7 @@ class Config extends Install
 {
     public $config = [
         'key' => 'tournament',
-        'version' => '1.0.0',
+        'version' => '1.0.2',
         'icon_small' => 'fa-solid fa-trophy',
         'author' => 'c0rian',
         'link' => 'https://github.com/c0r1an',
@@ -110,7 +110,7 @@ class Config extends Install
             `created_at` DATETIME NOT NULL,
             PRIMARY KEY (`id`),
             INDEX `idx_tournament_team_members_team_id` (`team_id`),
-            CONSTRAINT `fk_tournament_team_members_team` FOREIGN KEY (`team_id`) REFERENCES `[prefix]_tournament_teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+            FOREIGN KEY (`team_id`) REFERENCES `[prefix]_tournament_teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_member_profiles` (
@@ -127,7 +127,7 @@ class Config extends Install
             `updated_at` DATETIME NOT NULL,
             PRIMARY KEY (`id`),
             UNIQUE KEY `uniq_tournament_member_profiles_member` (`team_member_id`),
-            CONSTRAINT `fk_tournament_member_profiles_member` FOREIGN KEY (`team_member_id`) REFERENCES `[prefix]_tournament_team_members` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+            FOREIGN KEY (`team_member_id`) REFERENCES `[prefix]_tournament_team_members` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_tournament_teams` (
@@ -140,8 +140,8 @@ class Config extends Install
             PRIMARY KEY (`id`),
             UNIQUE KEY `uniq_tournament_team_registration` (`tournament_id`, `team_id`),
             INDEX `idx_tournament_tournament_teams_status` (`status`),
-            CONSTRAINT `fk_tournament_tournament_teams_tournament` FOREIGN KEY (`tournament_id`) REFERENCES `[prefix]_tournament_tournaments` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-            CONSTRAINT `fk_tournament_tournament_teams_team` FOREIGN KEY (`team_id`) REFERENCES `[prefix]_tournament_teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+            FOREIGN KEY (`tournament_id`) REFERENCES `[prefix]_tournament_tournaments` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+            FOREIGN KEY (`team_id`) REFERENCES `[prefix]_tournament_teams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_matches` (
@@ -165,8 +165,8 @@ class Config extends Install
             PRIMARY KEY (`id`),
             UNIQUE KEY `uniq_tournament_round_match` (`tournament_id`, `round`, `match_no`),
             INDEX `idx_tournament_matches_tournament` (`tournament_id`),
-            CONSTRAINT `fk_tournament_matches_tournament` FOREIGN KEY (`tournament_id`) REFERENCES `[prefix]_tournament_tournaments` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-            CONSTRAINT `fk_tournament_matches_next` FOREIGN KEY (`next_match_id`) REFERENCES `[prefix]_tournament_matches` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
+            FOREIGN KEY (`tournament_id`) REFERENCES `[prefix]_tournament_tournaments` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+            FOREIGN KEY (`next_match_id`) REFERENCES `[prefix]_tournament_matches` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_match_reports` (
@@ -180,7 +180,7 @@ class Config extends Install
             `created_at` DATETIME NOT NULL,
             PRIMARY KEY (`id`),
             INDEX `idx_tournament_match_reports_match` (`match_id`),
-            CONSTRAINT `fk_tournament_match_reports_match` FOREIGN KEY (`match_id`) REFERENCES `[prefix]_tournament_matches` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+            FOREIGN KEY (`match_id`) REFERENCES `[prefix]_tournament_matches` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_match_evidence` (
@@ -192,7 +192,7 @@ class Config extends Install
             `created_at` DATETIME NOT NULL,
             PRIMARY KEY (`id`),
             INDEX `idx_tournament_match_evidence_report` (`match_report_id`),
-            CONSTRAINT `fk_tournament_match_evidence_report` FOREIGN KEY (`match_report_id`) REFERENCES `[prefix]_tournament_match_reports` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+            FOREIGN KEY (`match_report_id`) REFERENCES `[prefix]_tournament_match_reports` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_match_disputes` (
@@ -208,7 +208,7 @@ class Config extends Install
             PRIMARY KEY (`id`),
             INDEX `idx_tournament_match_disputes_match` (`match_id`),
             INDEX `idx_tournament_match_disputes_status` (`status`),
-            CONSTRAINT `fk_tournament_match_disputes_match` FOREIGN KEY (`match_id`) REFERENCES `[prefix]_tournament_matches` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+            FOREIGN KEY (`match_id`) REFERENCES `[prefix]_tournament_matches` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
         CREATE TABLE IF NOT EXISTS `[prefix]_tournament_audit_log` (
@@ -243,9 +243,12 @@ class Config extends Install
                     `updated_at` DATETIME NOT NULL,
                     PRIMARY KEY (`id`),
                     UNIQUE KEY `uniq_tournament_member_profiles_member` (`team_member_id`),
-                    CONSTRAINT `fk_tournament_member_profiles_member` FOREIGN KEY (`team_member_id`) REFERENCES `[prefix]_tournament_team_members` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+                    FOREIGN KEY (`team_member_id`) REFERENCES `[prefix]_tournament_team_members` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;');
                 // no break
+            case "1.0.1":
+                // 1.0.2 only adjusts install-time foreign key naming to avoid collisions.
+                break;
         }
 
         return '"' . $this->config['key'] . '" Update-function executed.';

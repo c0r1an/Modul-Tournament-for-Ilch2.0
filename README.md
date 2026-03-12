@@ -49,7 +49,7 @@ You can automate tag + push + GitHub release with:
 
 ```powershell
 cd application/modules/tournament
-.\scripts\release.ps1 -Version 1.0.1
+.\scripts\release.ps1 -Version 1.0.2
 ```
 
 Authentication for GitHub Release creation:
@@ -60,5 +60,5 @@ Authentication for GitHub Release creation:
 Optional parameters:
 
 ```powershell
-.\scripts\release.ps1 -Version 1.0.1 -Title "v1.0.1" -Notes "Bugfix release"
+.\scripts\release.ps1 -Version 1.0.2 -Title "v1.0.2" -Notes "Bugfix release"
 ```
